@@ -15,6 +15,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    let service = StockViewModel()
+    
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -23,6 +26,9 @@ struct ContentView: View {
             Text("Hello, world!")
         }
         .padding()
+        .onAppear {
+            service.fetchStocks()
+        }
     }
 }
 

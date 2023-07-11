@@ -8,23 +8,70 @@
 import Foundation
 import Combine
 
+enum StockServiceError : Error {
+    case invalidURL
+    case emptyResponse
+    case malformed
+    case outOfService
+    case decodingError
+    
+    var description : String {
+        switch self {
+        case .invalidURL:
+            return "Invalid URL"
+        case .emptyResponse:
+            return "Empty Response"
+        case .malformed:
+            return "Malformed Data"
+        case .outOfService:
+            return "Out of Service"
+        case .decodingError:
+            return "Decoding Error"
+        }
+        
+    }
+}
+
+
 class StocksService {
     var cancellable = Set<AnyCancellable>()
     let endpoint = "https://storage.googleapis.com/cash-homework/cash-stocks-api/portfolio.json"
     
-    func fetchStocks() -> Future<[Stock], Error> {
+    func fetchStocks() -> Future<[Stock], StockServiceError> {
         return Future { promise in
-            guard let url = URL(string:self.endpoint) else {
-                promise(.failure())
+            guard let url = URL(string: self.endpoint) else {
+                promise(.failure(.invalidURL))
                 return
             }
             
-            URLSession.shared.dataTaskPublisher(for: url) { data, res, err in
-                
-                do {
-                    let response = try JSONDecoder().decode(StockResponse.self, )
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                if let error = error {
+                    print("API request error:", error)
+                    promise(.failure(.outOfService))
+                    return
                 }
-            }
+                
+                guard let data = data else {
+                    print("Empty response")
+                    promise(.failure(.emptyResponse))
+                    return
+                }
+                
+                // Print the raw data
+                if let rawData = String(data: data, encoding: .utf8) {
+                    print("Raw Data:", rawData)
+                }
+                
+                // Perform decoding and handle the fetched stocks here
+                do {
+                    let decodedStocks = try JSONDecoder().decode(StockResponse.self, from: data)
+                    let stocks = decodedStocks.stocks
+                    promise(.success(stocks))
+                } catch {
+                    print("Decoding error:", error)
+                    promise(.failure(.decodingError))
+                }
+            }.resume()
         }
     }
 }

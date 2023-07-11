@@ -16,6 +16,7 @@
 		F1795CFF2A5CBADC009DB028 /* StocksAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1795CFE2A5CBADC009DB028 /* StocksAppUITestsLaunchTests.swift */; };
 		F1795D0E2A5CC820009DB028 /* StocksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1795D0D2A5CC820009DB028 /* StocksService.swift */; };
 		F1795D112A5CC8F8009DB028 /* StockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1795D102A5CC8F8009DB028 /* StockResponse.swift */; };
+		F1795D132A5D2DA9009DB028 /* StockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1795D122A5D2DA9009DB028 /* StockViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		F1795CFE2A5CBADC009DB028 /* StocksAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		F1795D0D2A5CC820009DB028 /* StocksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksService.swift; sourceTree = "<group>"; };
 		F1795D102A5CC8F8009DB028 /* StockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockResponse.swift; sourceTree = "<group>"; };
+		F1795D122A5D2DA9009DB028 /* StockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 		F1795D0C2A5CC80F009DB028 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				F1795D122A5D2DA9009DB028 /* StockViewModel.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1795CE32A5CBADA009DB028 /* ContentView.swift in Sources */,
+				F1795D132A5D2DA9009DB028 /* StockViewModel.swift in Sources */,
 				F1795D112A5CC8F8009DB028 /* StockResponse.swift in Sources */,
 				F1795CE12A5CBADA009DB028 /* StocksAppApp.swift in Sources */,
 				F1795D0E2A5CC820009DB028 /* StocksService.swift in Sources */,
