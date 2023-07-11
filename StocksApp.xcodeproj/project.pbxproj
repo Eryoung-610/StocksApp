@@ -17,6 +17,9 @@
 		F1795D0E2A5CC820009DB028 /* StocksService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1795D0D2A5CC820009DB028 /* StocksService.swift */; };
 		F1795D112A5CC8F8009DB028 /* StockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1795D102A5CC8F8009DB028 /* StockResponse.swift */; };
 		F1795D132A5D2DA9009DB028 /* StockViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1795D122A5D2DA9009DB028 /* StockViewModel.swift */; };
+		F19F4D2A2A5E05E300DC5BCC /* StockDataProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F4D292A5E05E300DC5BCC /* StockDataProcessor.swift */; };
+		F19F4D2C2A5E119100DC5BCC /* StockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F4D2B2A5E119100DC5BCC /* StockCellView.swift */; };
+		F19F4D2E2A5E1B6000DC5BCC /* StockListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F4D2D2A5E1B6000DC5BCC /* StockListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,9 @@
 		F1795D0D2A5CC820009DB028 /* StocksService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksService.swift; sourceTree = "<group>"; };
 		F1795D102A5CC8F8009DB028 /* StockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockResponse.swift; sourceTree = "<group>"; };
 		F1795D122A5D2DA9009DB028 /* StockViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockViewModel.swift; sourceTree = "<group>"; };
+		F19F4D292A5E05E300DC5BCC /* StockDataProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDataProcessor.swift; sourceTree = "<group>"; };
+		F19F4D2B2A5E119100DC5BCC /* StockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCellView.swift; sourceTree = "<group>"; };
+		F19F4D2D2A5E1B6000DC5BCC /* StockListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +155,7 @@
 		F1795D0C2A5CC80F009DB028 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				F19F4D282A5E038000DC5BCC /* Views */,
 				F1795D122A5D2DA9009DB028 /* StockViewModel.swift */,
 			);
 			path = Screens;
@@ -160,6 +167,16 @@
 				F1795D102A5CC8F8009DB028 /* StockResponse.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F19F4D282A5E038000DC5BCC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F19F4D292A5E05E300DC5BCC /* StockDataProcessor.swift */,
+				F19F4D2B2A5E119100DC5BCC /* StockCellView.swift */,
+				F19F4D2D2A5E1B6000DC5BCC /* StockListView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,10 +310,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1795CE32A5CBADA009DB028 /* ContentView.swift in Sources */,
+				F19F4D2E2A5E1B6000DC5BCC /* StockListView.swift in Sources */,
 				F1795D132A5D2DA9009DB028 /* StockViewModel.swift in Sources */,
 				F1795D112A5CC8F8009DB028 /* StockResponse.swift in Sources */,
 				F1795CE12A5CBADA009DB028 /* StocksAppApp.swift in Sources */,
 				F1795D0E2A5CC820009DB028 /* StocksService.swift in Sources */,
+				F19F4D2A2A5E05E300DC5BCC /* StockDataProcessor.swift in Sources */,
+				F19F4D2C2A5E119100DC5BCC /* StockCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

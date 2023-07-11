@@ -8,25 +8,40 @@
 import Foundation
 import Combine
 
-class StockViewModel : ObservableObject {
-    @Published var stocks = [Stock]()
+enum State {
+    case idle
+    case loading
+    case loaded
+    case error
+    
+}
+
+class StockViewModel: ObservableObject {
+    @Published var processedStocks = [ProcessedStock]()
     
     var service = StocksService()
+    var dataProcessor = StockDataProcessor()
     var cancellables = Set<AnyCancellable>()
+    
     
     func fetchStocks() {
         service.fetchStocks()
             .sink { completion in
                 switch completion {
-                case .finished :
+                case .finished:
                     break
-                case .failure(let err) :
+                case .failure(let err):
                     print(err.localizedDescription)
                 }
-            } receiveValue : { stocks in
-                self.stocks = stocks
+            } receiveValue: { [weak self] stocks in
+                guard let self = self else { return }
+                
+                // Process the stock data using StockDataProcessor
+                let processedStocks = self.dataProcessor.processStockData(stocks)
+                
+                // Assign the processed stock data to the published property
+                self.processedStocks = processedStocks
             }
             .store(in: &cancellables)
     }
-    
 }

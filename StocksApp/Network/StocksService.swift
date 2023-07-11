@@ -45,32 +45,43 @@ class StocksService {
             }
             
             URLSession.shared.dataTask(with: url) { data, response, error in
+                
+//                Check for OOS
                 if let error = error {
                     print("API request error:", error)
                     promise(.failure(.outOfService))
                     return
                 }
                 
+//                Check for empty Response
                 guard let data = data else {
                     print("Empty response")
                     promise(.failure(.emptyResponse))
                     return
                 }
                 
-                // Print the raw data
-                if let rawData = String(data: data, encoding: .utf8) {
-                    print("Raw Data:", rawData)
+//                Check for malformed
+                guard let httpRes = response as? HTTPURLResponse, 200...299 ~= httpRes.statusCode else {
+                    promise(.failure(.malformed))
+                    return
                 }
+                
+                // Print the raw data
+//                if let rawData = String(data: data, encoding: .utf8) {
+//                    print("Raw Data:", rawData)
+//                }
                 
                 // Perform decoding and handle the fetched stocks here
                 do {
                     let decodedStocks = try JSONDecoder().decode(StockResponse.self, from: data)
                     let stocks = decodedStocks.stocks
                     promise(.success(stocks))
+                    print("Decoded Stocks : \(stocks)")
                 } catch {
                     print("Decoding error:", error)
                     promise(.failure(.decodingError))
                 }
+//                Resume required to start the fetchStocks, otherwise it is in suspended state until we call it.
             }.resume()
         }
     }

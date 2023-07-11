@@ -16,18 +16,14 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let service = StockViewModel()
+    @StateObject var viewModel = StockViewModel()
     
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            StockListView(viewModel: viewModel)
         }
-        .padding()
         .onAppear {
-            service.fetchStocks()
+            viewModel.fetchStocks()
         }
     }
 }
