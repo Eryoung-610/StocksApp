@@ -5,16 +5,48 @@
 //  Created by Eric Young on 7/10/23.
 //
 
+import Combine
 import XCTest
+@testable import StocksApp
+
 
 final class StocksAppTests: XCTestCase {
-
+    
+    var cancellables : Set <AnyCancellable> = []
+    
+    var viewModel : StockViewModel!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        viewModel = StockViewModel()
     }
 
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        cancellables = []
+    }
+    
+    func test_checkForMalformed_shouldPass() {
+        
+    }
+    
+    func test_checkForMalformed_shouldFail() {
+        
+    }
+    
+    func test_checkForOOS_shouldPass() {
+        
+    }
+    
+    func test_checkForOOS_shouldFail() {
+        
+    }
+    
+    func test_checkForEmpty_shouldPass() {
+        
+    }
+    
+    func test_checkForEmpty_shouldFail() {
+        
     }
 
     func testExample() throws {
