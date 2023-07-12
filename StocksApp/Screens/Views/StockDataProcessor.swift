@@ -47,17 +47,21 @@ struct ProcessedStock : Identifiable {
 }
 
 class StockDataProcessor {
-//    Formatting the date coming in from currentPriceTimestamp
+    //    Formatting the date coming in from currentPriceTimestamp
     private let dateFormatter: DateFormatter = {
+        
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .medium
+        
         return formatter
     }()
     
-//    Clean up data including, removing special characters, converting current_price_cents to dollars, and timestamp
+    //    Clean up data including, removing special characters, converting current_price_cents to dollars, and timestamp
     func processStockData(_ stocks: [Stock]) -> [ProcessedStock] {
+        
         let processedStocks = stocks.map { stock in
+            
             // Clean up ticker by removing special characters
             let cleanedTicker = cleanTicker(stock.ticker)
             
@@ -80,8 +84,9 @@ class StockDataProcessor {
         return processedStocks
     }
     
-//    Clean up ticker here
+    //    Clean up ticker here
     private func cleanTicker(_ ticker: String) -> String {
+        
         // Remove special characters from ticker
         let allowedCharacterSet = CharacterSet.alphanumerics
         let cleanedTicker = ticker.components(separatedBy: allowedCharacterSet.inverted).joined()
@@ -89,7 +94,7 @@ class StockDataProcessor {
         return cleanedTicker
     }
     
-//    Convert to LocalDateString here
+    //    Convert to LocalDateString here
     private func convertUNIXTimestampToLocalDateString(_ timestamp: Int) -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
         return dateFormatter.string(from: date)

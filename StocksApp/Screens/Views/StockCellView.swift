@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct StockCellView: View {
     let processedStock: ProcessedStock
     
@@ -15,30 +14,33 @@ struct StockCellView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(processedStock.ticker)
-                    .font(.title2)
+                    .font(.title3)
+                
                 Text(processedStock.name)
                     .font(.caption)
+                    .lineLimit(nil)
+                    .minimumScaleFactor(0.5)
+                    .frame(maxWidth: 80, alignment: .leading)
             }
             
             Spacer()
             
             Text("$" + String(format: "%.2f", processedStock.currentPrice))
-                .font(.title2)
+                .font(.title3)
             
             Spacer()
             
             VStack(alignment: .trailing) {
-
-                
-                if let quantity = processedStock.quantity {
-                    Text("\(quantity)")
-                    Text("$\(String(format: "%.2f", processedStock.currentPrice * Double(quantity)))")
-                }
+                Text("\(processedStock.quantity ?? 0)")
+                Text("$\(String(format: "%.2f", processedStock.currentPrice * Double(processedStock.quantity ?? 0)))")
             }
         }
         .padding()
+        .frame(maxWidth: .infinity)
     }
 }
+
+
 
 
 struct StockCellView_Previews: PreviewProvider {

@@ -8,14 +8,21 @@
 import SwiftUI
 
 struct StockListView: View {
-    @StateObject var viewModel = StockViewModel()
+    @ObservedObject var viewModel: StockViewModel
     
     var body: some View {
-        List(viewModel.processedStocks) { stock in
-            StockCellView(processedStock: stock)
+        ScrollView {
+            LazyVStack(spacing: 16) {
+                ForEach(viewModel.processedStocks) { stock in
+                    StockCellView(processedStock: stock)
+                    Divider()
+                }
+            }
+            .padding()
         }
     }
 }
+
 
 
 //struct StockListView_Previews: PreviewProvider {
