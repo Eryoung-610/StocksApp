@@ -8,6 +8,11 @@
 import Foundation
 import Combine
 
+
+protocol StocksServiceProtocol {
+    func fetchStocks() -> Future <[Stock], StockServiceError>
+}
+
 enum StockServiceError : Error {
     case invalidURL
     case emptyResponse
@@ -32,8 +37,7 @@ enum StockServiceError : Error {
     }
 }
 
-
-class StocksService {
+class StocksService : StocksServiceProtocol {
     var cancellable = Set<AnyCancellable>()
     let endpoint = "https://storage.googleapis.com/cash-homework/cash-stocks-api/portfolio.json"
     
@@ -76,7 +80,7 @@ class StocksService {
                     let decodedStocks = try JSONDecoder().decode(StockResponse.self, from: data)
                     let stocks = decodedStocks.stocks
                     promise(.success(stocks))
-                    print("Decoded Stocks : \(stocks)")
+//                    print("Decoded Stocks : \(stocks)")
                 } catch {
                     print("Decoding error:", error)
                     promise(.failure(.decodingError))

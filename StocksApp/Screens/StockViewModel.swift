@@ -20,10 +20,13 @@ class StockViewModel: ObservableObject {
     @Published var processedStocks = [ProcessedStock]()
     @Published var state: StockViewState = .idle
     
-    var service = StocksService()
+    var service : StocksServiceProtocol
     var dataProcessor = StockDataProcessor()
     var cancellables = Set<AnyCancellable>()
     
+    init(service : StocksServiceProtocol = StocksService()) {
+        self.service = service
+    }
     
     func fetchStocks() {
         
