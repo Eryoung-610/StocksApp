@@ -40,7 +40,7 @@ class StockViewModel: ObservableObject {
                     
                 case .failure(let err):
                     self.state = .error
-                    print(err.localizedDescription)
+                    print("Localized Description : ", err.localizedDescription)
                 }
             } receiveValue: { [weak self] stocks in
                 guard let self = self else { return }
@@ -50,6 +50,7 @@ class StockViewModel: ObservableObject {
                 
                 // Assign the processed stock data to the published property
                 self.processedStocks = processedStocks
+                
             }
             .store(in: &cancellables)
     }

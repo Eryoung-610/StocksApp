@@ -17,7 +17,7 @@ enum fileName : String {
     case Stocks_decoding
     case Stocks_empty
     case Stocks_malformed
-    case Stocks_sucess
+    case Stocks_success
     case Stocks_failure
     
 }
@@ -32,7 +32,7 @@ final class StocksAppTests: XCTestCase {
     }
     
     func test_fetchStocks_shouldPass() {
-        let mockService = mockStocksService(fileName: .Stocks_sucess)
+        let mockService = mockStocksService(fileName: .Stocks_success)
         let viewModel = StockViewModel(service : mockService)
         
         let exp = XCTestExpectation(description: "Fetch Stocks Success")
@@ -43,15 +43,19 @@ final class StocksAppTests: XCTestCase {
             .sink { state in
                 switch state {
                 case .idle, .loading :
+                    print("State: idle/loading")
                     break
                 case .loaded:
-                    let stock = viewModel.processedStocks.first
-                    
-                    XCTAssertEqual(stock?.currentPriceTimestamp, "Apr 18, 2023 at 12:23:52 PM")
-                    XCTAssertEqual(stock?.ticker,"GSPC")
-                    XCTAssertEqual(stock?.name, "S&P 500")
-                    XCTAssertEqual(stock?.currency, "USD")
-                    exp.fulfill()
+                    if let stock = viewModel.processedStocks.first {
+                        
+                        XCTAssertEqual(stock.currentPriceTimestamp, "Apr 18, 2023 at 12:23:52 PM")
+                        XCTAssertEqual(stock.ticker, "GSPC")
+                        XCTAssertEqual(stock.name, "S&P 500")
+                        XCTAssertEqual(stock.currency, "USD")
+                        exp.fulfill()
+                    } else {
+                        XCTFail("Failed to unwrap stock")
+                    }
                     
                 case .error:
                     XCTFail()
@@ -67,7 +71,7 @@ final class StocksAppTests: XCTestCase {
     }
     
     func test_fetchStocks_shouldFail() {
-        let mockService = mockStocksService(fileName: .Stocks_empty)
+        let mockService = mockStocksService(fileName: .Stocks_malformed)
         let viewModel = StockViewModel(service : mockService)
         
         let exp = XCTestExpectation(description: "Fetch Stocks Fail")
