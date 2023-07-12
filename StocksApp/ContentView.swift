@@ -18,26 +18,40 @@ struct ContentView: View {
     
     @StateObject var viewModel = StockViewModel()
     
+    init() {
+        UINavigationBar.appearance().backgroundColor = UIColor.white
+        UINavigationBar.appearance().shadowImage = UIImage()
+    }
+    
     var body: some View {
         
         NavigationView {
             ScrollView {
                 VStack {
                     ChartView(viewModel: viewModel)
+                        .padding(.bottom,20)
+                    
+                    
+                    KeyView()
+                        .padding(.vertical,-10)
+                    Divider()
                     
                     StockListView(viewModel: viewModel)
                         .navigationTitle("Portfolio")
                         .navigationBarItems(
                             leading: Image(systemName: "person.crop.circle")
-                                .imageScale(.large)
+                                .resizable()
+                                .frame(width:24,height:24)
                                 .foregroundColor(.primary),
                             trailing: Image(systemName: "magnifyingglass")
-                                .imageScale(.large)
+                                .resizable()
+                                .frame(width:24,height:24)
                                 .foregroundColor(.primary)
                         )
                 }
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             viewModel.fetchStocks()
         }

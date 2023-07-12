@@ -57,6 +57,7 @@ struct ChartView: View {
             .chartPlotStyle { chartContent in
                 chartContent
                     .frame(height:200)
+                    .foregroundColor(.green)
                 
             }
             
