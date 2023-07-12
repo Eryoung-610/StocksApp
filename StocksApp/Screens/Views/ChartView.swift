@@ -27,7 +27,7 @@ struct ChartView: View {
         VStack{
             
             // Calculate the portfolio total based on stocks data
-            Text("Portfolio Total: " + calculatePortfolioTotal().formatPrice())
+            Text("Portfolio Total: " + calculatePortfolioTotal().formatPriceToString())
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .fontWeight(.semibold)
             
