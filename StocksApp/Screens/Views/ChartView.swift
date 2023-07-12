@@ -8,7 +8,8 @@
 import SwiftUI
 import Charts
 
-struct MonthlyPortfolioTotal {
+struct MonthlyPortfolioTotal : Identifiable {
+    let id = UUID()
     var date: Date
     var portfolioTotal: Double
 
@@ -23,6 +24,21 @@ struct MonthlyPortfolioTotal {
 struct ChartView: View {
     @ObservedObject var viewModel: StockViewModel
     
+    var data : [MonthlyPortfolioTotal] = [
+        MonthlyPortfolioTotal(month: 1, portfolioTotal: 50000),
+        MonthlyPortfolioTotal(month: 2, portfolioTotal: 65000),
+        MonthlyPortfolioTotal(month: 3, portfolioTotal: 80000),
+        MonthlyPortfolioTotal(month: 4, portfolioTotal: 85000),
+        MonthlyPortfolioTotal(month: 5, portfolioTotal: 92500),
+        MonthlyPortfolioTotal(month: 6, portfolioTotal: 100000),
+        MonthlyPortfolioTotal(month: 7, portfolioTotal: 95000),
+        MonthlyPortfolioTotal(month: 8, portfolioTotal: 115000),
+        MonthlyPortfolioTotal(month: 9, portfolioTotal: 123000),
+        MonthlyPortfolioTotal(month: 10, portfolioTotal: 185000),
+        MonthlyPortfolioTotal(month: 11, portfolioTotal: 165000),
+        MonthlyPortfolioTotal(month: 12, portfolioTotal: 140000)
+    ]
+    
     var body: some View {
         VStack{
             
@@ -32,6 +48,18 @@ struct ChartView: View {
                 .fontWeight(.semibold)
             
         
+            Chart(data) {
+                LineMark(
+                    x: .value("Month", $0.date),
+                    y: .value("Portfolio Total", $0.portfolioTotal)
+                )
+            }
+            .chartPlotStyle { chartContent in
+                chartContent
+                    .frame(height:200)
+                
+            }
+            
         }
         .padding(.horizontal)
     }
