@@ -23,6 +23,7 @@
 		F19F4D302A5E3BFF00DC5BCC /* StockDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F4D2F2A5E3BFF00DC5BCC /* StockDetailView.swift */; };
 		F19F4D322A5E420400DC5BCC /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F4D312A5E420400DC5BCC /* ChartView.swift */; };
 		F19F4D342A5E655300DC5BCC /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F4D332A5E655300DC5BCC /* KeyView.swift */; };
+		F19F4D372A5E6AB500DC5BCC /* TransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F4D362A5E6AB500DC5BCC /* TransferView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		F19F4D2F2A5E3BFF00DC5BCC /* StockDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailView.swift; sourceTree = "<group>"; };
 		F19F4D312A5E420400DC5BCC /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		F19F4D332A5E655300DC5BCC /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
+		F19F4D362A5E6AB500DC5BCC /* TransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 		F1795D0C2A5CC80F009DB028 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				F19F4D352A5E6A9400DC5BCC /* Pages */,
 				F19F4D282A5E038000DC5BCC /* Views */,
 				F1795D122A5D2DA9009DB028 /* StockViewModel.swift */,
 			);
@@ -186,6 +189,14 @@
 				F19F4D332A5E655300DC5BCC /* KeyView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F19F4D352A5E6A9400DC5BCC /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				F19F4D362A5E6AB500DC5BCC /* TransferView.swift */,
+			);
+			path = Pages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F19F4D342A5E655300DC5BCC /* KeyView.swift in Sources */,
+				F19F4D372A5E6AB500DC5BCC /* TransferView.swift in Sources */,
 				F1795CE32A5CBADA009DB028 /* ContentView.swift in Sources */,
 				F19F4D2E2A5E1B6000DC5BCC /* StockListView.swift in Sources */,
 				F1795D132A5D2DA9009DB028 /* StockViewModel.swift in Sources */,

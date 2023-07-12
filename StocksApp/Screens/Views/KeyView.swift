@@ -17,6 +17,7 @@ struct KeyView: View {
             
             Text("Cur. Price")
                 .opacity(0.6)
+                .padding(.leading,-20)
             
             Spacer()
             

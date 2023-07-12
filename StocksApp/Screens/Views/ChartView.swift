@@ -24,6 +24,7 @@ struct MonthlyPortfolioTotal : Identifiable {
 struct ChartView: View {
     @ObservedObject var viewModel: StockViewModel
     
+//    Dummy Data for the chart
     var data : [MonthlyPortfolioTotal] = [
         MonthlyPortfolioTotal(month: 1, portfolioTotal: 50000),
         MonthlyPortfolioTotal(month: 2, portfolioTotal: 65000),
