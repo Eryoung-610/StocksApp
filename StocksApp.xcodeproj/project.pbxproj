@@ -24,6 +24,9 @@
 		F19F4D322A5E420400DC5BCC /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F4D312A5E420400DC5BCC /* ChartView.swift */; };
 		F19F4D342A5E655300DC5BCC /* KeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F4D332A5E655300DC5BCC /* KeyView.swift */; };
 		F19F4D392A5E79CC00DC5BCC /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F4D382A5E79CC00DC5BCC /* ErrorView.swift */; };
+		F19F4D412A5EA6F400DC5BCC /* Stocks_sucess.geojson in Resources */ = {isa = PBXBuildFile; fileRef = F19F4D3F2A5E9D2B00DC5BCC /* Stocks_sucess.geojson */; };
+		F19F4D422A5EA6F600DC5BCC /* Stocks_malformed.geojson in Resources */ = {isa = PBXBuildFile; fileRef = F19F4D402A5EA69C00DC5BCC /* Stocks_malformed.geojson */; };
+		F19F4D442A5EA75100DC5BCC /* Stocks_empty.geojson in Resources */ = {isa = PBXBuildFile; fileRef = F19F4D432A5EA75100DC5BCC /* Stocks_empty.geojson */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,9 @@
 		F19F4D312A5E420400DC5BCC /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		F19F4D332A5E655300DC5BCC /* KeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyView.swift; sourceTree = "<group>"; };
 		F19F4D382A5E79CC00DC5BCC /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		F19F4D3F2A5E9D2B00DC5BCC /* Stocks_sucess.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Stocks_sucess.geojson; sourceTree = "<group>"; };
+		F19F4D402A5EA69C00DC5BCC /* Stocks_malformed.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Stocks_malformed.geojson; sourceTree = "<group>"; };
+		F19F4D432A5EA75100DC5BCC /* Stocks_empty.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Stocks_empty.geojson; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +144,7 @@
 		F1795CF12A5CBADC009DB028 /* StocksAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				F19F4D3E2A5E9CFA00DC5BCC /* Data */,
 				F1795CF22A5CBADC009DB028 /* StocksAppTests.swift */,
 			);
 			path = StocksAppTests;
@@ -197,6 +204,16 @@
 			children = (
 			);
 			path = Pages;
+			sourceTree = "<group>";
+		};
+		F19F4D3E2A5E9CFA00DC5BCC /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				F19F4D3F2A5E9D2B00DC5BCC /* Stocks_sucess.geojson */,
+				F19F4D402A5EA69C00DC5BCC /* Stocks_malformed.geojson */,
+				F19F4D432A5EA75100DC5BCC /* Stocks_empty.geojson */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,6 +329,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F19F4D422A5EA6F600DC5BCC /* Stocks_malformed.geojson in Resources */,
+				F19F4D442A5EA75100DC5BCC /* Stocks_empty.geojson in Resources */,
+				F19F4D412A5EA6F400DC5BCC /* Stocks_sucess.geojson in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

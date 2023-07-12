@@ -61,6 +61,7 @@ class StockDataProcessor {
             // Convert current_price_timestamp to local date string
             let currentPriceTimestamp = convertUNIXTimestampToLocalDateString(stock.current_price_timestamp)
             
+            
             return ProcessedStock(
                 ticker: cleanedTicker,
                 name: stock.name,
@@ -70,6 +71,7 @@ class StockDataProcessor {
                 currentPriceTimestamp: currentPriceTimestamp
             )
         }
+        
         
         return processedStocks
     }

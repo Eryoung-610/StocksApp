@@ -14,10 +14,11 @@ import XCTest
 // Cover Malformed, OOS, Empty, Decode Errors
 
 enum fileName : String {
-    case stocks_decoding
-    case stocks_empty
-    case stocks_malformed
-    case stocks_success
+    case Stocks_decoding
+    case Stocks_empty
+    case Stocks_malformed
+    case Stocks_sucess
+    case Stocks_failure
     
 }
 
@@ -25,90 +26,175 @@ final class StocksAppTests: XCTestCase {
     
     var cancellables : Set <AnyCancellable> = []
     
-    var viewModel : StockViewModel!
-    
-    override func setUpWithError() throws {
-        viewModel = StockViewModel()
-    }
-
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         cancellables = []
     }
     
-//    CHeck for malformed data. If we find it, we return malformed msg.
-    func test_checkForMalformed_shouldPass() {
+    func test_fetchStocks_shouldPass() {
+        let mockService = mockStocksService(fileName: .Stocks_sucess)
+        let viewModel = StockViewModel(service : mockService)
         
-    }
-    
-    
-    func test_checkForMalformed_shouldFail() {
+        let exp = XCTestExpectation(description: "Fetch Stocks Success")
         
-    }
-    
-    func test_checkForOOS_shouldPass() {
+        viewModel.fetchStocks()
         
-    }
-    
-    func test_checkForOOS_shouldFail() {
-        
-    }
-    
-    func test_checkForEmpty_shouldPass() {
-        
-    }
-    
-    func test_checkForEmpty_shouldFail() {
-        
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
-    class mockStocksService : StocksServiceProtocol {
-        
-        let fileName : fileName
-        
-        init(fileName : fileName) {
-            self.fileName = fileName
-        }
-        
-        private func loadMockData(_ file : String) -> URL? {
-            return Bundle(for: type(of:self)).url(forResource: file, withExtension: "json")
-        }
-        
-        func fetchStocks() -> Future<[Stock], StockServiceError> {
-            return Future { [weak self] promise in
-                guard let self = self else {return}
-                
-                guard let url = self.loadMockData(self.fileName.rawValue) else {
-                    promise(.failure(.invalidURL))
-                    return
+        viewModel.$state
+            .sink { state in
+                switch state {
+                case .idle, .loading :
+                    break
+                case .loaded:
+                    let stock = viewModel.processedStocks.first
+                    
+                    XCTAssertEqual(stock?.currentPriceTimestamp, "Apr 18, 2023 at 12:23:52 PM")
+                    XCTAssertEqual(stock?.ticker,"GSPC")
+                    XCTAssertEqual(stock?.name, "S&P 500")
+                    XCTAssertEqual(stock?.currency, "USD")
+                    exp.fulfill()
+                    
+                case .error:
+                    XCTFail()
                 }
                 
-                let data = try! Data(contentsOf: url)
-                
-                do {
-                    let decodedStocks = try JSONDecoder().decode(StockResponse.self, from: data)
-                    let stocks = decodedStocks.stocks
-                    promise(.success(stocks))
-                } catch {
-                    promise(.failure(.decodingError))
+                if case .loaded = state {
+                    exp.fulfill()
                 }
-                
             }
+            .store(in: &cancellables)
+        wait(for: [exp], timeout : 5.0)
+        XCTAssertFalse(viewModel.processedStocks.isEmpty)
+    }
+    
+    func test_fetchStocks_shouldFail() {
+        let mockService = mockStocksService(fileName: .Stocks_empty)
+        let viewModel = StockViewModel(service : mockService)
+        
+        let exp = XCTestExpectation(description: "Fetch Stocks Fail")
+        
+        viewModel.fetchStocks()
+        
+        viewModel.$state
+            .sink { completion in
+                XCTFail("Fetch Stocks should not fail")
+            } receiveValue: { state in
+                switch state {
+                case .idle, .loading :
+                    break
+                case .loaded :
+                    XCTFail()
+                case .error:
+                    XCTAssertEqual(state, .error)
+                    XCTAssertEqual(viewModel.processedStocks.count,0)
+                    exp.fulfill()
+                }
+            }
+            .store(in: &cancellables)
+        wait(for: [exp], timeout: 1.0)
+    }
+    
+    
+    //    Check for Decoding error
+    func test_fetchStocks_decoding_shouldFail() {
+        let mockService = mockStocksService(fileName: .Stocks_malformed)
+        let viewModel = StockViewModel(service: mockService)
+        
+        let exp = XCTestExpectation(description: "Fetch Stocks fail - Decoding")
+        
+        var receivedError : Error?
+        
+        viewModel.fetchStocks()
+        
+        viewModel.$processedStocks
+            .sink( receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error) :
+                    receivedError = error
+                    XCTAssertEqual(error.localizedDescription,StockServiceError.decodingError.description)
+                case .finished :
+                    break
+                }
+            }, receiveValue: { _ in
+                XCTAssertTrue(viewModel.processedStocks.isEmpty)
+                exp.fulfill()
+            })
+            .store(in: &cancellables)
+        
+        viewModel.$state
+            .sink { state in
+                if case .error = state {
+                    if let error = receivedError as? StockServiceError, case .decodingError = error {
+                        exp.fulfill()
+                    }
+                }
+            }
+            .store(in: &cancellables)
+        
+        wait(for: [exp], timeout:1.0)
+    }
+    
+    func test_fetchStocks_isEmpty_shouldFail() {
+        let mockService = mockStocksService(fileName: .Stocks_empty)
+        let viewModel = StockViewModel(service : mockService)
+        
+        let exp = XCTestExpectation(description: "Fetch Stocks success is empty")
+        
+        viewModel.fetchStocks()
+        
+        viewModel.$state
+            .sink { completion in
+                XCTFail("Fetch Stocks should not fail")
+            } receiveValue: { state in
+                switch state {
+                case .idle, .loading:
+                    break
+                case .loaded:
+                    XCTAssertEqual(viewModel.processedStocks.count, 0)
+                    XCTAssertEqual(state, .loaded)
+                    exp.fulfill()
+                case .error:
+                    XCTFail()
+                }
+            }
+            .store(in:&cancellables)
+        wait(for:[exp], timeout:1.0)
+    }
+    
+}
+
+class mockStocksService : StocksServiceProtocol {
+    
+    let fileName : fileName
+    
+    init(fileName : fileName) {
+        self.fileName = fileName
+    }
+    
+    private func loadMockData(_ file : String) -> URL? {
+        return Bundle(for: type(of:self)).url(forResource: file, withExtension: "json")
+    }
+    
+    var cancellables = Set<AnyCancellable>()
+    
+    func fetchStocks() -> Future<[Stock], StockServiceError> {
+        return Future { [weak self] promise in
+            guard let self = self else {return}
+            
+            guard let url = self.loadMockData(self.fileName.rawValue) else {
+                promise(.failure(.invalidURL))
+                return
+            }
+            
+            let data = try! Data(contentsOf: url)
+            
+            do {
+                let decodedStocks = try JSONDecoder().decode(StockResponse.self, from: data)
+                let stocks = decodedStocks.stocks
+                promise(.success(stocks))
+            } catch {
+                promise(.failure(.decodingError))
+            }
+            
         }
     }
 }

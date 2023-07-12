@@ -70,10 +70,6 @@ class StocksService : StocksServiceProtocol {
                     return
                 }
                 
-                // Print the raw data
-//                if let rawData = String(data: data, encoding: .utf8) {
-//                    print("Raw Data:", rawData)
-//                }
                 
                 // Perform decoding and handle the fetched stocks here
                 do {
