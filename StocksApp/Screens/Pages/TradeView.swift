@@ -1,5 +1,5 @@
 //
-//  ErrorView.swift
+//  TradeView.swift
 //  StocksApp
 //
 //  Created by Eric Young on 7/11/23.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct ErrorView: View {
+struct TradeView: View {
     var body: some View {
-        Text("Error View")
+        Text("Trade View")
     }
 }
 
-struct ErrorView_Previews: PreviewProvider {
+struct TradeView_Previews: PreviewProvider {
     static var previews: some View {
-        ErrorView()
+        TradeView()
     }
 }

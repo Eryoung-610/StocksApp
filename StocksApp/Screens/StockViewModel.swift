@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-enum State {
+enum StockViewState {
     case idle
     case loading
     case loaded
@@ -18,7 +18,7 @@ enum State {
 
 class StockViewModel: ObservableObject {
     @Published var processedStocks = [ProcessedStock]()
-    @Published var state: State = .idle
+    @Published var state: StockViewState = .idle
     
     var service = StocksService()
     var dataProcessor = StockDataProcessor()

@@ -109,8 +109,6 @@ struct ContentView: View {
 }
 
 
-
-
 struct bottomNavBar: View {
     let image : Image
     let action : () -> Void
