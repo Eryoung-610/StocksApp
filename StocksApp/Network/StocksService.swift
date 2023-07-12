@@ -76,7 +76,6 @@ class StocksService : StocksServiceProtocol {
                     let decodedStocks = try JSONDecoder().decode(StockResponse.self, from: data)
                     let stocks = decodedStocks.stocks
                     promise(.success(stocks))
-//                    print("Decoded Stocks : \(stocks)")
                 } catch {
                     print("Decoding error:", error)
                     promise(.failure(.decodingError))

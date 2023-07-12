@@ -9,9 +9,6 @@ import Combine
 import XCTest
 @testable import StocksApp
 
-// Goals - Test Fetch Call?
-// Get res
-// Cover Malformed, OOS, Empty, Decode Errors
 
 enum fileName : String {
     case Stocks_decoding
