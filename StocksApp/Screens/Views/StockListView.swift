@@ -14,19 +14,14 @@ struct StockListView: View {
         ScrollView {
             LazyVStack(spacing: 16) {
                 ForEach(viewModel.processedStocks) { stock in
-                    StockCellView(processedStock: stock)
+                    NavigationLink(destination: StockDetailView(processedStock: stock)) {
+                        StockCellView(processedStock: stock)
+                            .foregroundColor(.primary)
+                            .multilineTextAlignment(.leading)
+                    }
                     Divider()
                 }
             }
-            .padding()
         }
     }
 }
-
-
-
-//struct StockListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        StockListView(viewModel: processedStocks)
-//    }
-//}

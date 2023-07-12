@@ -24,26 +24,16 @@ struct ProcessedStock : Identifiable {
         quantity: 10,
         currentPriceTimestamp: "2023-07-12 10:30:00"
     )
+    
+    var formattedCurrentPrice: String {
+        return currentPrice.formatPriceToString()
+    }
+    
+    var formattedTotalPrice: String {
+        let totalPrice = currentPrice * Double(quantity ?? 0)
+        return totalPrice.formatPriceToString()
+    }
 
-    static let mockStocks: [ProcessedStock] = [
-        ProcessedStock(
-            ticker: "^GSPC",
-            name: "S&P 500",
-            currency: "USD",
-            currentPrice: 3181.57,
-            quantity: nil,
-            currentPriceTimestamp: "2023-07-12 10:30:00"
-        ),
-        ProcessedStock(
-            ticker: "AAPL",
-            name: "Apple Inc.",
-            currency: "USD",
-            currentPrice: 142.25,
-            quantity: 10,
-            currentPriceTimestamp: "2023-07-12 10:30:00"
-        ),
-        // Add more ProcessedStock instances here
-    ]
 }
 
 class StockDataProcessor {
@@ -99,4 +89,15 @@ class StockDataProcessor {
         let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
         return dateFormatter.string(from: date)
     }
+}
+
+extension Double {
+    func formatPriceToString() -> String {
+        let formatString = String(format: "$%.2f", self)
+        let regex = try! NSRegularExpression(pattern: "(\\d)(?=(\\d{3})+(?!\\d))", options: [])
+        let range = NSMakeRange(0, formatString.count)
+        let commaSeparatedString = regex.stringByReplacingMatches(in: formatString, options: [], range: range, withTemplate: "$1,")
+        return commaSeparatedString.replacingOccurrences(of: "\\.?0+$", with: "", options: .regularExpression)
+    }
+    
 }

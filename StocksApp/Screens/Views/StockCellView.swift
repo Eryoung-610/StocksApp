@@ -22,22 +22,28 @@ struct StockCellView: View {
                     .minimumScaleFactor(0.5)
                     .frame(maxWidth: 80, alignment: .leading)
             }
-
+            
             
             Spacer()
             
-            Text("$" + String(format: "%.2f", processedStock.currentPrice))
+            Text(processedStock.formattedCurrentPrice)
                 .font(.title3)
                 .frame(maxWidth:110, alignment: .leading)
-
+            
             
             Spacer()
             
-            VStack(alignment: .trailing) {
-                Text("\(processedStock.quantity ?? 0)")
-                Text("$\(String(format: "%.2f", processedStock.currentPrice * Double(processedStock.quantity ?? 0)))")
+            HStack {
+                VStack(alignment: .trailing) {
+                    Text("\(processedStock.quantity ?? 0)")
+                    Text("\(processedStock.formattedTotalPrice)")
+                    
+                }
+                .frame(minWidth: 85, alignment: .trailing)
+                
+                Image(systemName : "chevron.right")
+                    .foregroundColor(.gray)
             }
-            .frame(minWidth: 80)
         }
         .padding()
         .frame(maxWidth: .infinity)

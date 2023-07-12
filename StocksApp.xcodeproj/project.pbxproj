@@ -20,6 +20,8 @@
 		F19F4D2A2A5E05E300DC5BCC /* StockDataProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F4D292A5E05E300DC5BCC /* StockDataProcessor.swift */; };
 		F19F4D2C2A5E119100DC5BCC /* StockCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F4D2B2A5E119100DC5BCC /* StockCellView.swift */; };
 		F19F4D2E2A5E1B6000DC5BCC /* StockListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F4D2D2A5E1B6000DC5BCC /* StockListView.swift */; };
+		F19F4D302A5E3BFF00DC5BCC /* StockDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F4D2F2A5E3BFF00DC5BCC /* StockDetailView.swift */; };
+		F19F4D322A5E420400DC5BCC /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19F4D312A5E420400DC5BCC /* ChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		F19F4D292A5E05E300DC5BCC /* StockDataProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDataProcessor.swift; sourceTree = "<group>"; };
 		F19F4D2B2A5E119100DC5BCC /* StockCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockCellView.swift; sourceTree = "<group>"; };
 		F19F4D2D2A5E1B6000DC5BCC /* StockListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockListView.swift; sourceTree = "<group>"; };
+		F19F4D2F2A5E3BFF00DC5BCC /* StockDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockDetailView.swift; sourceTree = "<group>"; };
+		F19F4D312A5E420400DC5BCC /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +179,8 @@
 				F19F4D292A5E05E300DC5BCC /* StockDataProcessor.swift */,
 				F19F4D2B2A5E119100DC5BCC /* StockCellView.swift */,
 				F19F4D2D2A5E1B6000DC5BCC /* StockListView.swift */,
+				F19F4D2F2A5E3BFF00DC5BCC /* StockDetailView.swift */,
+				F19F4D312A5E420400DC5BCC /* ChartView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -312,10 +318,12 @@
 				F1795CE32A5CBADA009DB028 /* ContentView.swift in Sources */,
 				F19F4D2E2A5E1B6000DC5BCC /* StockListView.swift in Sources */,
 				F1795D132A5D2DA9009DB028 /* StockViewModel.swift in Sources */,
+				F19F4D322A5E420400DC5BCC /* ChartView.swift in Sources */,
 				F1795D112A5CC8F8009DB028 /* StockResponse.swift in Sources */,
 				F1795CE12A5CBADA009DB028 /* StocksAppApp.swift in Sources */,
 				F1795D0E2A5CC820009DB028 /* StocksService.swift in Sources */,
 				F19F4D2A2A5E05E300DC5BCC /* StockDataProcessor.swift in Sources */,
+				F19F4D302A5E3BFF00DC5BCC /* StockDetailView.swift in Sources */,
 				F19F4D2C2A5E119100DC5BCC /* StockCellView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
