@@ -14,9 +14,9 @@
             filePath = "StocksAppTests/StocksAppTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "test_fetchStocks_decoding_shouldFail()"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "test_fetchStocks_isEmpty_shouldFail()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

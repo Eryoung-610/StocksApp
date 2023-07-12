@@ -11,12 +11,9 @@ import XCTest
 
 
 enum fileName : String {
-    case Stocks_decoding
     case Stocks_empty
     case Stocks_malformed
     case Stocks_success
-    case Stocks_failure
-    
 }
 
 final class StocksAppTests: XCTestCase {
