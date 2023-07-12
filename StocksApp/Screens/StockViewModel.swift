@@ -18,6 +18,7 @@ enum State {
 
 class StockViewModel: ObservableObject {
     @Published var processedStocks = [ProcessedStock]()
+    @Published var state: State = .idle
     
     var service = StocksService()
     var dataProcessor = StockDataProcessor()
@@ -25,12 +26,17 @@ class StockViewModel: ObservableObject {
     
     
     func fetchStocks() {
+        
+        state = .loading
+        
         service.fetchStocks()
             .sink { completion in
                 switch completion {
                 case .finished:
-                    break
+                    self.state = .loaded
+                    
                 case .failure(let err):
+                    self.state = .error
                     print(err.localizedDescription)
                 }
             } receiveValue: { [weak self] stocks in
