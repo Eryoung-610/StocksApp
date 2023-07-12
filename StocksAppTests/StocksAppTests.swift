@@ -9,6 +9,17 @@ import Combine
 import XCTest
 @testable import StocksApp
 
+// Goals - Test Fetch Call?
+// Get res
+// Cover Malformed, OOS, Empty, Decode Errors
+
+enum fileName : String {
+    case stocks_decoding
+    case stocks_empty
+    case stocks_malformed
+    case stocks_success
+    
+}
 
 final class StocksAppTests: XCTestCase {
     
@@ -25,9 +36,11 @@ final class StocksAppTests: XCTestCase {
         cancellables = []
     }
     
+//    CHeck for malformed data. If we find it, we return malformed msg.
     func test_checkForMalformed_shouldPass() {
         
     }
+    
     
     func test_checkForMalformed_shouldFail() {
         
@@ -64,4 +77,38 @@ final class StocksAppTests: XCTestCase {
         }
     }
 
+    class mockStocksService : StocksServiceProtocol {
+        
+        let fileName : fileName
+        
+        init(fileName : fileName) {
+            self.fileName = fileName
+        }
+        
+        private func loadMockData(_ file : String) -> URL? {
+            return Bundle(for: type(of:self)).url(forResource: file, withExtension: "json")
+        }
+        
+        func fetchStocks() -> Future<[Stock], StockServiceError> {
+            return Future { [weak self] promise in
+                guard let self = self else {return}
+                
+                guard let url = self.loadMockData(self.fileName.rawValue) else {
+                    promise(.failure(.invalidURL))
+                    return
+                }
+                
+                let data = try! Data(contentsOf: url)
+                
+                do {
+                    let decodedStocks = try JSONDecoder().decode(StockResponse.self, from: data)
+                    let stocks = decodedStocks.stocks
+                    promise(.success(stocks))
+                } catch {
+                    promise(.failure(.decodingError))
+                }
+                
+            }
+        }
+    }
 }
