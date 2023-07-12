@@ -22,11 +22,14 @@ struct StockCellView: View {
                     .minimumScaleFactor(0.5)
                     .frame(maxWidth: 80, alignment: .leading)
             }
+
             
             Spacer()
             
             Text("$" + String(format: "%.2f", processedStock.currentPrice))
                 .font(.title3)
+                .frame(maxWidth:110, alignment: .leading)
+
             
             Spacer()
             
@@ -34,6 +37,7 @@ struct StockCellView: View {
                 Text("\(processedStock.quantity ?? 0)")
                 Text("$\(String(format: "%.2f", processedStock.currentPrice * Double(processedStock.quantity ?? 0)))")
             }
+            .frame(minWidth: 80)
         }
         .padding()
         .frame(maxWidth: .infinity)
